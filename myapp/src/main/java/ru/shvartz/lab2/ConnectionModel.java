@@ -10,6 +10,8 @@ public class ConnectionModel {
     private String driverName;
 
 
+    public ConnectionModel() {}
+
     public ConnectionModel(String host, int port, String database, String user, String password) {
         this.host = host;
         this.port = port;
@@ -21,6 +23,9 @@ public class ConnectionModel {
     }
 
 
+    public String getDatabase() {
+        return database;
+    }
 
     public String getUser() {
         return user;
