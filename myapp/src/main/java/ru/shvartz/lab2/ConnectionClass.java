@@ -1,16 +1,22 @@
+package ru.shvartz.lab2;
+
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class ConnectionClass {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        Connection connection = getDBConnection();
+
         try {
-            Connection connection = getDBConnection();
             createTable(connection);
             insertTable(connection);
             select(connection);
         }catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+        finally {
+            connection.close();
         }
 
     }
@@ -131,14 +137,12 @@ public class ConnectionClass {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch(ClassNotFoundException e) {
-            System.out.println("Что-то пошло не так");
             System.out.println(e.getMessage());
         }
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lab2?serverTimezone=UTC","root","AkwcEcsE");
             return connection;
         } catch (SQLException e) {
-            System.out.println("Что-то не так с подключением");
             System.out.println(e.getMessage());
         }
         return connection;
