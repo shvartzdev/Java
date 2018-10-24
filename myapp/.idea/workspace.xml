@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9eca2960-84bf-41c8-b86f-fa5511a4828d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlTasks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/db.script/create.sql" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -58,7 +55,7 @@
       <file leaf-file-name="ConnectionClass.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="82">
+            <state relative-caret-position="735">
               <caret line="35" selection-start-line="35" selection-end-line="35" />
             </state>
           </provider>
@@ -67,7 +64,7 @@
       <file leaf-file-name="sqlTasks.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlTasks.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
+            <state relative-caret-position="483">
               <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
             </state>
           </provider>
@@ -331,16 +328,15 @@
       <workItem from="1539187666583" duration="1764000" />
       <workItem from="1540373381074" duration="218000" />
       <workItem from="1540374327305" duration="1658000" />
-      <workItem from="1540376341278" duration="11940000" />
+      <workItem from="1540376341278" duration="12317000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25888000" />
+    <option name="totallyTimeSpent" value="26265000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -352,13 +348,13 @@
       <window_info anchor="right" id="Maven Projects" order="3" sideWeight="0.49925485" weight="0.3296875" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49895832" visible="true" weight="0.26815644" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895832" visible="true" weight="0.26815644" />
       <window_info anchor="right" id="Coverage" sideWeight="0.50229007" side_tool="true" visible="true" weight="0.1716418" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32135075" />
       <window_info id="Capture Tool" order="2" />
       <window_info anchor="bottom" id="Database Console" order="7" sideWeight="0.49895614" weight="0.32897604" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14179105" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14179105" />
       <window_info anchor="right" id="Database" order="3" sideWeight="0.49770993" weight="0.1716418" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -577,13 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/db.script/create.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/wirbel/lab01/myapp/Application.java" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/98d22689-07b3-4762-9465-d085c1b6ebda/console.sql">
       <provider selected="true" editor-type-id="text-editor" />
@@ -609,17 +598,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="82">
+        <state relative-caret-position="735">
           <caret line="35" selection-start-line="35" selection-end-line="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlTasks.java">
+    <entry file="file://$PROJECT_DIR$/src/test/resources/db.script/create.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        <state relative-caret-position="294">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
