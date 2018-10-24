@@ -131,12 +131,14 @@ public class ConnectionClass {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch(ClassNotFoundException e) {
+            System.out.println("Что-то пошло не так");
             System.out.println(e.getMessage());
         }
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lab2?serverTimezone=UTC","root","AkwcEcsE");
             return connection;
         } catch (SQLException e) {
+            System.out.println("Что-то не так с подключением");
             System.out.println(e.getMessage());
         }
         return connection;

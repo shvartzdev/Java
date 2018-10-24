@@ -9,12 +9,15 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 <name>myapp</name> <!-- Название модуля -->
 
 <dependencies>
-<dependency>
-<groupId>ru.wirbel.lab01</groupId>
-<artifactId>mylib</artifactId>
-<version>${project.version}</version>
-<scope>compile</scope>
-</dependency>
+
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.13</version>
+    </dependency>
+
+
+
 </dependencies>
 
 <build>
@@ -23,9 +26,6 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>exec-maven-plugin</artifactId>
       <version>1.6.0</version>
-      <configuration>
-        <mainClass>ru.wirbel.lab01.myapp.Application</mainClass>
-      </configuration>
     </plugin>
   </plugins>
 </build>
