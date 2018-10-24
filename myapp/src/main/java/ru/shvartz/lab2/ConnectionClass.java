@@ -1,6 +1,5 @@
 package ru.shvartz.lab2;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class ConnectionClass {
@@ -10,24 +9,35 @@ public class ConnectionClass {
 
         try {
             createTable(connection);
-            insertTable(connection);
-            select(connection);
-        }catch (SQLException e) {
+            connection.close();
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
-        finally {
+        } finally {
             connection.close();
         }
 
     }
 
+    public static void dropDatabase(Connection connection) throws SQLException {
+        Statement statement = null;
+        String dropTableString = "DROP DATABASE lab2";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(dropTableString);
+            System.out.println("database dropped");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
 
     public static void insertTable(Connection connection) throws SQLException {
 
         Statement statement = null;
 
         String insertTable = "INSERT INTO USER VALUES"
-                + "('2','usname','pass', 'mail','1', '12.08.2018')";
+                + "('1','usname','pass', 'mail','1', '12.08.2018')," +
+                "('1','usname','pass', 'mail','1', '12.08.2018')";
         try {
             statement = connection.createStatement();
             statement.executeUpdate(insertTable);
@@ -78,7 +88,7 @@ public class ConnectionClass {
         }
     }
 
-    public static void deleteTable(Connection connection) throws  SQLException{
+    public static void deleteTable(Connection connection) throws SQLException {
         String deleteUser = "delete from user where userId = 1";
         Statement statement = null;
         try {
@@ -92,7 +102,7 @@ public class ConnectionClass {
         }
     }
 
-    public static void select(Connection connection) throws SQLException{
+    public static void select(Connection connection) throws SQLException {
         Statement statement = null;
         String selectTable = "select * from user";
 
@@ -131,16 +141,15 @@ public class ConnectionClass {
     }
 
 
-
     public static Connection getDBConnection() {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lab2?serverTimezone=UTC","root","AkwcEcsE");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lab2?serverTimezone=UTC", "root", "AkwcEcsE");
             return connection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
