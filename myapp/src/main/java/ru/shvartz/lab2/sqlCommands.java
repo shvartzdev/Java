@@ -1,8 +1,6 @@
 package ru.shvartz.lab2;
 
-
 public class sqlCommands {
-    ConnectionModel connectionModel = new ConnectionModel();
     private String dropDatabaseString = "DROP DATABASE lab2;";
     private String createDataBaseString = "CREATE DATABASE lab2;";
 

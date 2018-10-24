@@ -10,8 +10,6 @@ public class ConnectionModel {
     private String driverName;
 
 
-    public ConnectionModel() {}
-
     public ConnectionModel(String host, int port, String database, String user, String password) {
         this.host = host;
         this.port = port;
@@ -22,28 +20,16 @@ public class ConnectionModel {
         this.driverName = "com.mysql.cj.jdbc.Driver";
     }
 
-
-    public String getDatabase() {
-        return database;
-    }
-
     public String getUser() {
         return user;
     }
-
-
     public String getPassword() {
         return password;
     }
-
-
     public String getUrl() {
         return url;
     }
-
-
     public String getDriverName() {
         return driverName;
     }
-
 }
