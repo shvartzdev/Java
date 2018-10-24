@@ -1,6 +1,7 @@
 package ru.shvartz.lab2;
 
 import java.sql.*;
+import ru.shvartz.lab2.ConnectionModel;
 
 public class ConnectionClass {
 
@@ -142,14 +143,15 @@ public class ConnectionClass {
 
 
     public static Connection getDBConnection() {
+        ConnectionModel connectionModel = new ConnectionModel("localhost",3306, "lab2","root","AkwcEcsE");
         Connection connection = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(connectionModel.getDriverName());
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lab2?serverTimezone=UTC", "root", "AkwcEcsE");
+            connection = DriverManager.getConnection(connectionModel.getUrl(), connectionModel.getUser(), connectionModel.getPassword());
             return connection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
