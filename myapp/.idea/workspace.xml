@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9eca2960-84bf-41c8-b86f-fa5511a4828d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/98d22689-07b3-4762-9465-d085c1b6ebda.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/98d22689-07b3-4762-9465-d085c1b6ebda.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/ConnectionClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlCommands.java" afterDir="false" />
-    </list>
+    <list default="true" id="9eca2960-84bf-41c8-b86f-fa5511a4828d" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,8 +76,8 @@
       <file leaf-file-name="sqlCommands.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlCommands.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1944">
-              <caret line="107" column="5" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
+            <state relative-caret-position="504">
+              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
               <folding>
                 <element signature="e#314#315#0" expanded="true" />
                 <element signature="e#341#342#0" expanded="true" />
@@ -161,7 +157,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -334,11 +330,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27967000" />
+    <option name="totallyTimeSpent" value="28416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -350,7 +345,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" sideWeight="0.49925485" weight="0.3296875" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49895832" visible="true" weight="0.2679372" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49895832" weight="0.2679372" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32135075" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -714,7 +709,7 @@
           <settings layout="Hierarchic Group" zoom="1.0" x="107.0" y="152.5" />
           <SelectedNodes />
           <Categories>
-            <Category />
+            <Category>Key columns</Category>
             <Category>Columns</Category>
           </Categories>
         </state>
@@ -729,8 +724,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ru/shvartz/lab2/sqlCommands.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="107" column="5" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
+        <state relative-caret-position="504">
+          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
           <folding>
             <element signature="e#314#315#0" expanded="true" />
             <element signature="e#341#342#0" expanded="true" />
