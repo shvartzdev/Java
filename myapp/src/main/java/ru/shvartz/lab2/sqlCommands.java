@@ -5,6 +5,15 @@ public class sqlCommands {
     private String createDataBaseString = "CREATE DATABASE lab2;";
 
     private String useDatabase = "use lab2;";
+    private String hack = "set foreign_key_checks=0;";
+
+
+    private String hackBack = "set foreign_key_checks=1;";
+
+    public String getHack() {
+        return hack;
+    }
+
     private String createUser = "CREATE TABLE USER("
             + "userId int NOT NULL, "
             + "username VARCHAR(20) NOT NULL, "
@@ -37,6 +46,11 @@ public class sqlCommands {
 
     private String deleteAllFromUser = "delete from user;";
     private String deleteAllFromCourse = "delete from course;";
+    private String alterTable = "alter table user add foreign key (courseID) references course(courseId);";
+
+    public String getAlterTable() {
+        return alterTable;
+    }
 
     public String getDeleteAllFromUser() {
         return deleteAllFromUser;
@@ -89,4 +103,7 @@ public class sqlCommands {
         return selectFromCourse;
     }
 
+    public String getHackBack() {
+        return hackBack;
+    }
 }

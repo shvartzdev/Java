@@ -18,8 +18,10 @@ public class ConnectionClass {
             sqlTasks.doCommand(connection, commands.getCreateDataBaseString());
             System.out.println("database was created");
             sqlTasks.doCommand(connection, commands.getUseDatabase());
-            sqlTasks.doCommand(connection, commands.getCreateUser());
             sqlTasks.doCommand(connection, commands.getCreateCourse());
+            sqlTasks.doCommand(connection, commands.getHack());
+            sqlTasks.doCommand(connection, commands.getCreateUser());
+            sqlTasks.doCommand(connection, commands.getAlterTable());
             sqlTasks.doCommand(connection, commands.getDeleteAllFromUser());
             sqlTasks.doCommand(connection, commands.getDeleteAllFromCourse());
             sqlTasks.doCommand(connection, commands.getInsertTableUser());
