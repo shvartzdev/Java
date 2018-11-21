@@ -15,12 +15,17 @@ public class ConnectionClass {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Введите команду");
-        System.out.println("1 - insert, 2 - update, 3 - select, 4 - delete");
+
+
+
 
        int command = 0;
 
         try {
             do {
+
+                System.out.println("1 - insert, 2 - update, 3 - select, 4 - delete");
+
                 command = scan.nextInt();
                 switch (command) {
                     case 1: {
