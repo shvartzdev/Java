@@ -1165,10 +1165,20 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="289" parent="278" name="PRIMARY">
+    <index id="289" parent="278" name="courseID">
+      <ColNames>courseID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="290" parent="278" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userId</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="291" parent="278" name="user_ibfk_1">
+      <ColNames>courseID</ColNames>
+      <RefSchemaName>lab2</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>courseid</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>
