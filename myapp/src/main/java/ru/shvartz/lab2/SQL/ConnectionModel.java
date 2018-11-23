@@ -1,4 +1,4 @@
-package ru.shvartz.lab2;
+package ru.shvartz.lab2.SQL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
