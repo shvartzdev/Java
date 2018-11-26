@@ -10,22 +10,22 @@ import java.sql.Connection;
 @Getter
 @Setter
 public class UserDAO  {
-    private int id;
+
+    public int id;
     private String name;
     private String email;
     private int courseId;
+    Connection connection;
 
-
-    Connection connection = ConnectionModel.getDBConnection();
     public UserDAO(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-        //this.courseId = courseId;
     }
 
-    public UserDAO(Connection connection) {
-        this.connection = connection;
+
+    public UserDAO() {
+        this.connection = ConnectionModel.getDBConnection();
     }
 
     @Override

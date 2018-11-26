@@ -1,7 +1,6 @@
 package ru.shvartz.lab2.servlets;
 
 import ru.shvartz.lab2.SQL.CRUDOperations;
-import ru.shvartz.lab2.SQL.ConnectionModel;
 import ru.shvartz.lab2.dao.UserDAO;
 
 import javax.servlet.RequestDispatcher;
@@ -14,11 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ControllerServlet extends HttpServlet {
-    private UserDAO users;
-
-    public void init() {
-        CRUDOperations crudOperations = new CRUDOperations();
-    }
+    private CRUDOperations crudOperations = new CRUDOperations();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,6 +41,9 @@ public class ControllerServlet extends HttpServlet {
                 case "/update":
                     updateUser(request, response);
                     break;
+                case "/users":
+                    listUsers(request,response);
+                    break;
                 default:
                     listUsers(request, response);
                     break;
@@ -57,15 +55,18 @@ public class ControllerServlet extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("UserForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("insert.jsp");
         dispatcher.forward(request, response);
     }
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        CRUDOperations crud = new CRUDOperations();
-        List<UserDAO> users = crud.selectTable();
-        request.setAttribute("listUser", users);
+        List<UserDAO> users = crudOperations.selectTable();
+        request.setAttribute("users", users);
+        for (UserDAO user: users
+             ) {
+            System.out.println(user.getId() + "|" + user.getName() + "|" + user.getEmail());
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("users.jsp");
         dispatcher.forward(request, response);
     }
@@ -73,9 +74,8 @@ public class ControllerServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        CRUDOperations crud = new CRUDOperations();
-        UserDAO existingUser = crud.getUserById(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("UserForm.jsp");
+        UserDAO existingUser = crudOperations.getUserById(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
 
@@ -83,31 +83,31 @@ public class ControllerServlet extends HttpServlet {
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
+        UserDAO user = parsing(request);
+        crudOperations.insertTable(user);
+        response.sendRedirect("list");
+    }
+
+    private UserDAO parsing(HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        CRUDOperations crud = new CRUDOperations();
-        UserDAO newUser = new UserDAO(7,name, email);
-        crud.insertTable(newUser);
-        response.sendRedirect("list");
+        UserDAO user = new UserDAO(id,name, email);
+
+        return user;
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        UserDAO updatedUser = new UserDAO(id, name, email);
-        CRUDOperations crud = new CRUDOperations();
-        crud.updateTable(updatedUser);
+        UserDAO user = parsing(request);
+        crudOperations.updateTable(user);
         response.sendRedirect("list");
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-
-        CRUDOperations crud = new CRUDOperations();
-        crud.deleteTable(id);
+        crudOperations.deleteTable(id);
         response.sendRedirect("list");
 
     }

@@ -1,6 +1,5 @@
 package ru.shvartz.lab2.SQL;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import ru.shvartz.lab2.dao.DAO;
 import ru.shvartz.lab2.dao.UserDAO;
 
@@ -13,10 +12,13 @@ import java.util.List;
 
 public class CRUDOperations implements DAO<UserDAO> {
 
-    Connection connection = ConnectionModel.getDBConnection();
+    private Connection connection = ConnectionModel.getDBConnection();
+    public CRUDOperations() {
+        Connection connection = ConnectionModel.getDBConnection();
+    }
 
     public String getById(int id, UserDAO user) throws SQLException {
-        PreparedStatement preparedStatement= null;
+        PreparedStatement preparedStatement;
         try {
 
             preparedStatement = connection.prepareStatement("select from users where id = ?");
@@ -30,25 +32,29 @@ public class CRUDOperations implements DAO<UserDAO> {
     }
 
     public UserDAO getUserById(int id) throws SQLException {
+        UserDAO user = null;
+        String selection = "select * from users where id = ?";
 
-        List<UserDAO> users = new ArrayList<UserDAO>();
-        users = selectTable();
+        PreparedStatement preparedStatement = connection.prepareStatement(selection);
+        preparedStatement.setInt(1,id);
+        ResultSet resultSet = preparedStatement.executeQuery();
 
-        //System.out.println(users.get(id));
+        if (resultSet.next()) {
+            String name = resultSet.getString("name");
+            String email = resultSet.getString("email");
 
-        for (UserDAO x: users)
-              {
-            if (x.getId() == id) {
-                System.out.println("x= " + x.toString());
-                return x;
-            }
+            user = new UserDAO(id,name,email);
         }
-        return users.get(id);
+        resultSet.close();
+        preparedStatement.close();
+
+        return user;
     }
 
     @Override
-    public  String insertTable( UserDAO user) throws SQLException {
+    public boolean insertTable(UserDAO user) throws SQLException {
         PreparedStatement preparedStatement = null;
+        boolean rowInserted = false;
         try {
             preparedStatement = connection.prepareStatement(Constants.getInsertIntoTable(),
                     preparedStatement.RETURN_GENERATED_KEYS);
@@ -58,26 +64,30 @@ public class CRUDOperations implements DAO<UserDAO> {
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.execute();
             System.out.println("insert the record. id = " + user.getId());
+            rowInserted = preparedStatement.executeUpdate() > 0;
+            preparedStatement.close();
         } catch (SQLException e) {
-            System.out.println("CreateTable method failed");
+            System.out.println("insertTable method failed");
             System.out.println(e.getMessage());
         }
-        return user.getId() + "|" + user.getName() + "|" + user.getEmail();
+        return rowInserted;
     }
 
     @Override
-    public  void updateTable (UserDAO user) throws SQLException{
+    public  boolean updateTable (UserDAO user) throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getUpdateTableName());
-
+        boolean rowUpdated = false;
         try {
             preparedStatement.setInt(3, user.getId());
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
-            preparedStatement.executeUpdate();
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+            preparedStatement.close();
         } catch (SQLException e) {
             System.out.println("updateTable failed");
             System.out.println(e.getMessage());
         }
+        return rowUpdated;
     }
 
     @Override
@@ -91,27 +101,31 @@ public class CRUDOperations implements DAO<UserDAO> {
             while (resultSet.next()) {
                 users.add(new UserDAO(resultSet.getInt("id"), resultSet.getString("name"),
                         resultSet.getString("email")));
-                System.out.print(resultSet.getInt(1) + "|");
-                System.out.print(resultSet.getString(2) + "|");
-                System.out.println(resultSet.getString(3) + "|");
+                //System.out.print(resultSet.getInt(1) + "|");
+                //System.out.print(resultSet.getString(2) + "|");
+                //System.out.println(resultSet.getString(3) + "|");
             }
         } catch (SQLException e) {
             System.out.println("selectTable failed");
             System.out.println(e.getMessage());
         }
+        //users.get(1);
         return users;
     }
 
     @Override
-    public  void deleteTable( int id) throws  SQLException {
+    public boolean deleteTable( int id) throws  SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getDeleteFromTable());
+        boolean rowDeleted = false;
         try {
             preparedStatement.setInt(1, id);
-            preparedStatement.execute();
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+            preparedStatement.close();
         } catch(SQLException e) {
             System.out.println("deleteTable was failed");
             System.out.println(e.getMessage());
         }
+        return rowDeleted;
     }
 
 }
