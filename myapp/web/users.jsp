@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: shvartz
@@ -28,15 +29,17 @@
             <th>name</th>
             <th>email</th>
         </tr>
-        <c:forEach var="user" items="${users}">
+
+        <c:forEach  items="${users}" var="user">
+
             <tr>
-                <td><c:out value="${user.id}" /></td>
-                <td><c:out value="${user.name}" /></td>
-                <td><c:out value="${user.email}" /></td>
+                <td><c:out value="${user.getId()}"></c:out></td>
+                <td><c:out value="${user.getName()}"></c:out></td>
+                <td><c:out value="${user.getEmail()}"></c:out></td>
                 <td>
-                    <a href="/edit?id=<c:out value='${user.id}' />">Edit</a>
+                    <a href="/edit?id=${user.getId()}">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/delete?id=<c:out value='${user.id}' />">Delete</a>
+                    <a href="/delete?id=${user.getId()}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

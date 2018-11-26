@@ -11,4 +11,16 @@
         <servlet-name>FirstServlet</servlet-name>
         <url-pattern>/first-servlet</url-pattern>
     </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ControllerServlet</servlet-name>
+        <servlet-class>ru.shvartz.lab2.servlets.ControllerServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ControllerServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
 </web-app>
