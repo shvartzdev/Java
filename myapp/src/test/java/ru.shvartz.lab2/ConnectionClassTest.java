@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ConnectionClassTest {
     Connection connection = ConnectionModel.getDBConnection();
-    private UserDAO user = new UserDAO(connection);
+    private UserDAO user = new UserDAO();
     private List<UserDAO> users = new ArrayList<>();
 
     CRUDOperations crudOperations = new CRUDOperations();
