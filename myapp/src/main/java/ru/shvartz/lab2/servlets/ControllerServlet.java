@@ -55,7 +55,7 @@ public class ControllerServlet extends HttpServlet {
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("insert.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/crud/insert.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -67,7 +67,7 @@ public class ControllerServlet extends HttpServlet {
              ) {
             System.out.println(user.getId() + "|" + user.getName() + "|" + user.getEmail());
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("users.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/crud/users.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -75,7 +75,7 @@ public class ControllerServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         UserDAO existingUser = crudOperations.getUserById(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("update.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/crud/update.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
 
