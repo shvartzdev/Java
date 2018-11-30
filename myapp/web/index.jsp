@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <h1>
+  <a href="/hello">Please <s>kill</s> click me!!!</a>
+  </h1>
   </body>
 </html>
