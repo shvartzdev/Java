@@ -13,7 +13,17 @@
 </head>
 <body>
 
-<h1>Spring MVC hello world</h1>
-<h2>${msg}</h2>
+<h1>${message}</h1>
+
+<h2 id="txt"></h2>
+
+<script type="text/javascript">
+    var check = function(txt){
+            document.getElementById("txt").innerHTML = document.getElementById("txt").innerHTML + txt;
+            setTimeout(function(){check(txt)}, 250);
+    };
+
+    check("I hate spring MVC! ");
+</script>
 </body>
 </html>
