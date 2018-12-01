@@ -1,4 +1,4 @@
-package ru.shvartz.lab2.dao;
+package ru.shvartz.lab2.models;
 
 
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.sql.Connection;
 
 @Getter
 @Setter
-public class UserDAO  {
+public class User {
 
     public int id;
     private String name;
@@ -17,14 +17,14 @@ public class UserDAO  {
     private int courseId;
     Connection connection;
 
-    public UserDAO(int id, String name, String email) {
+    public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
 
-    public UserDAO() {
+    public User() {
         this.connection = ConnectionModel.getDBConnection();
     }
 

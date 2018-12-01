@@ -1,7 +1,9 @@
-package ru.shvartz.lab2.SQL;
+package ru.shvartz.lab2.models.implementations;
 
-import ru.shvartz.lab2.dao.DAO;
-import ru.shvartz.lab2.dao.UserDAO;
+import ru.shvartz.lab2.SQL.ConnectionModel;
+import ru.shvartz.lab2.SQL.Constants;
+import ru.shvartz.lab2.interfaces.UserDAO;
+import ru.shvartz.lab2.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CRUDOperations implements DAO<UserDAO> {
+public class UserDAOImpl implements UserDAO<User> {
 
     private Connection connection = ConnectionModel.getDBConnection();
-    public CRUDOperations() {
+    public UserDAOImpl() {
         Connection connection = ConnectionModel.getDBConnection();
     }
 
-    public String getById(int id, UserDAO user) throws SQLException {
+    public String getById(int id, User user) throws SQLException {
         PreparedStatement preparedStatement;
         try {
 
@@ -31,8 +33,8 @@ public class CRUDOperations implements DAO<UserDAO> {
         return user.toString();
     }
 
-    public UserDAO getUserById(int id) throws SQLException {
-        UserDAO user = null;
+    public User getUserById(int id) throws SQLException {
+        User user = null;
         String selection = "select * from users where id = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(selection);
@@ -43,7 +45,7 @@ public class CRUDOperations implements DAO<UserDAO> {
             String name = resultSet.getString("name");
             String email = resultSet.getString("email");
 
-            user = new UserDAO(id,name,email);
+            user = new User(id,name,email);
         }
         resultSet.close();
         preparedStatement.close();
@@ -52,7 +54,7 @@ public class CRUDOperations implements DAO<UserDAO> {
     }
 
     @Override
-    public boolean insertTable(UserDAO user) throws SQLException {
+    public boolean insertTable(User user) throws SQLException {
         PreparedStatement preparedStatement = null;
         boolean rowInserted = false;
         try {
@@ -74,7 +76,7 @@ public class CRUDOperations implements DAO<UserDAO> {
     }
 
     @Override
-    public  boolean updateTable (UserDAO user) throws SQLException{
+    public  boolean updateTable (User user) throws SQLException{
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getUpdateTableName());
         boolean rowUpdated = false;
         try {
@@ -91,15 +93,15 @@ public class CRUDOperations implements DAO<UserDAO> {
     }
 
     @Override
-    public List<UserDAO> selectTable() throws SQLException {
+    public List<User> selectTable() throws SQLException {
 
-        List<UserDAO> users = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getSelectFromTable());
         ResultSet resultSet = preparedStatement.executeQuery();
 
         try {
             while (resultSet.next()) {
-                users.add(new UserDAO(resultSet.getInt("id"), resultSet.getString("name"),
+                users.add(new User(resultSet.getInt("id"), resultSet.getString("name"),
                         resultSet.getString("email")));
                 //System.out.print(resultSet.getInt(1) + "|");
                 //System.out.print(resultSet.getString(2) + "|");

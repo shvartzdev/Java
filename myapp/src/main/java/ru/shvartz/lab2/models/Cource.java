@@ -1,15 +1,14 @@
-package ru.shvartz.lab2.dao;
+package ru.shvartz.lab2.models;
 
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-public class CourceDAO {
+public class Cource {
     private int id;
     private String name;
     private String description;
 
-    public CourceDAO(int id, String name, String description) {
+    public Cource(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
