@@ -15,6 +15,11 @@
 # Generated files
 .idea/**/contentModel.xml
 
+
+#generated classes for deployement
+classes/
+lib/
+
 # Sensitive or high-churn files
 .idea/**/dataSources/
 .idea/**/dataSources.ids
@@ -116,6 +121,9 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+
+*.imi
+
 
 
 # End of https://www.gitignore.io/api/java,maven,intellij
