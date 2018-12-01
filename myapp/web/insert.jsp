@@ -22,7 +22,7 @@
     </h2>
 </div>
 <div align="center">
-    <form action="/insert" method="post">
+    <form action="/insertSave" method="post">
         <table border="2">
             <tr>
                 <td>Id</td>
