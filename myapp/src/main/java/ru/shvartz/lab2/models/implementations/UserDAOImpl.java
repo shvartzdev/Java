@@ -1,5 +1,6 @@
 package ru.shvartz.lab2.models.implementations;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import ru.shvartz.lab2.SQL.ConnectionModel;
 import ru.shvartz.lab2.SQL.Constants;
 import ru.shvartz.lab2.interfaces.UserDAO;
@@ -17,6 +18,12 @@ public class UserDAOImpl implements UserDAO<User> {
     private Connection connection = ConnectionModel.getDBConnection();
     public UserDAOImpl() {
         Connection connection = ConnectionModel.getDBConnection();
+    }
+
+    JdbcTemplate template;
+
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
     }
 
     public String getById(int id, User user) throws SQLException {
