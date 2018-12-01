@@ -18,5 +18,21 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/lab2?serverTimezone=UTC" />
+        <property name="username" value="root"></property>
+        <property name="password" value="AkwcEcsE"></property>
+    </bean>
+
+    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="ds"></property>
+    </bean>
+
+    <bean id="dao" class="ru.shvartz.lab2.models.implementations.UserDAOImpl">
+        <property name="template" ref="jt"></property>
+    </bean>
+
     <mvc:default-servlet-handler/>
 </beans>
