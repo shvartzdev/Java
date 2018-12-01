@@ -2,7 +2,6 @@ package ru.shvartz.lab2.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,19 +26,16 @@ public class UserListController {
         return new ModelAndView("userList", "users",users);
     }
 
-//    @RequestMapping(value="/insert")
-//    public ModelAndView insertUserRedirect(@ModelAttribute("user") User user) throws SQLException {
-//        //userDAO.insertTable(user);
-//        return new ModelAndView("redirect:/list");
-//    }
-
-    @RequestMapping(value="/insert")
-    public ModelAndView insert(@ModelAttribute("user") User user) throws SQLException {
-        userDAO.insertTable(user);
-        return new ModelAndView("insert","insert",user);
+    @RequestMapping(value="/insert", method = RequestMethod.GET)
+    public ModelAndView insert()  {
+        return new ModelAndView("insert");
     }
 
-
+    @RequestMapping(value="/insertSave", method = RequestMethod.POST)
+    public ModelAndView insertSave(@ModelAttribute("user") User user) throws SQLException {
+        userDAO.insertTable(user);
+        return new ModelAndView("redirect:/list", "insert", user);
+    }
 
     @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id) throws SQLException{
@@ -58,5 +54,4 @@ public class UserListController {
         userDAO.updateTable(user);
         return new ModelAndView("redirect:/list");
     }
-
 }
