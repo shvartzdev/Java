@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jstl/sql" %>
 <%--
   Created by IntelliJ IDEA.
   User: shvartz
@@ -31,16 +32,21 @@
             <th>email</th>
         </tr>
 
-        <c:forEach  items="${users}" var="user">
+
+        <sql:query var="users" dataSource="jdbc/lab2">
+            select id, name, email from users
+        </sql:query>
+
+        <c:forEach  items="${users.rows}" var="row">
 
             <tr>
-                <td><c:out value="${user.getId()}"></c:out></td>
-                <td><c:out value="${user.getName()}"></c:out></td>
-                <td><c:out value="${user.getEmail()}"></c:out></td>
+                <td><c:out value="${row.id}"></c:out></td>
+                <td><c:out value="${row.name}"></c:out></td>
+                <td><c:out value="${row.email}"></c:out></td>
                 <td>
-                    <a href="update/${user.getId()}">Edit</a>
+                    <a href="update/${row.id}">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="delete/${user.getId()}">Delete</a>
+                    <a href="delete/${row.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
