@@ -9,6 +9,7 @@ import ru.shvartz.lab2.SQL.ConnectionModel;
 import ru.shvartz.lab2.models.User;
 import ru.shvartz.lab2.models.implementations.UserDAOImpl;
 
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ public class ConnectionClassTest {
     private List<User> users = new ArrayList<>();
 
     UserDAOImpl userDAOImpl = new UserDAOImpl();
+
+    public ConnectionClassTest() throws SQLException, NamingException {
+    }
 
     @Test
     public void insertTest() throws SQLException{
