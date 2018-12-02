@@ -6,6 +6,9 @@ import ru.shvartz.lab2.SQL.Constants;
 import ru.shvartz.lab2.interfaces.UserDAO;
 import ru.shvartz.lab2.models.User;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,12 +18,14 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO<User> {
 
-    private Connection connection = ConnectionModel.getDBConnection();
-    public UserDAOImpl() {
-        Connection connection = ConnectionModel.getDBConnection();
-    }
+    InitialContext initialContext = new InitialContext();
+    DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/lab2");
+    Connection connection = dataSource.getConnection();
 
     JdbcTemplate template;
+
+    public UserDAOImpl() throws SQLException, NamingException {
+    }
 
     public void setTemplate(JdbcTemplate template) {
         this.template = template;
