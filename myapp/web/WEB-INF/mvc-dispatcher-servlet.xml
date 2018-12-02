@@ -34,5 +34,10 @@
         <property name="template" ref="jt"></property>
     </bean>
 
+    <!--
+    <bean id="DatabaseName" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/lab2"/>
+    </bean>
+-->
     <mvc:default-servlet-handler/>
 </beans>
