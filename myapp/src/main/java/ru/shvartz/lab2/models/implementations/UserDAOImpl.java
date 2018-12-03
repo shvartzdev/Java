@@ -19,7 +19,6 @@ public class UserDAOImpl implements UserDAO<User> {
 
     InitialContext initialContext = new InitialContext();
     DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/lab2");
-    //Connection connection = dataSource.getConnection();
     Connection connection = null;
 
     JdbcTemplate template;
