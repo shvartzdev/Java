@@ -1,7 +1,6 @@
 package ru.shvartz.lab2.models.implementations;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import ru.shvartz.lab2.SQL.ConnectionModel;
 import ru.shvartz.lab2.SQL.Constants;
 import ru.shvartz.lab2.interfaces.UserDAO;
 import ru.shvartz.lab2.models.User;
@@ -20,7 +19,8 @@ public class UserDAOImpl implements UserDAO<User> {
 
     InitialContext initialContext = new InitialContext();
     DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/lab2");
-    Connection connection = dataSource.getConnection();
+    //Connection connection = dataSource.getConnection();
+    Connection connection = null;
 
     JdbcTemplate template;
 
@@ -35,12 +35,15 @@ public class UserDAOImpl implements UserDAO<User> {
         PreparedStatement preparedStatement;
         try {
 
+            connection = dataSource.getConnection();
             preparedStatement = connection.prepareStatement("select from users where id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.execute();
             System.out.println("record with id = " + id);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            connection.close();
         }
         return user.toString();
     }
@@ -49,18 +52,25 @@ public class UserDAOImpl implements UserDAO<User> {
         User user = null;
         String selection = "select * from users where id = ?";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(selection);
-        preparedStatement.setInt(1,id);
-        ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            connection = dataSource.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(selection);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        if (resultSet.next()) {
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
+            if (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
 
-            user = new User(id,name,email);
+                user = new User(id, name, email);
+            }
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
         }
-        resultSet.close();
-        preparedStatement.close();
 
         return user;
     }
@@ -70,6 +80,7 @@ public class UserDAOImpl implements UserDAO<User> {
         PreparedStatement preparedStatement = null;
         boolean rowInserted = false;
         try {
+            connection = dataSource.getConnection();
             preparedStatement = connection.prepareStatement(Constants.getInsertIntoTable(),
                     preparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, user.getId());
@@ -83,12 +94,15 @@ public class UserDAOImpl implements UserDAO<User> {
         } catch (SQLException e) {
             System.out.println("insertTable method failed");
             System.out.println(e.getMessage());
+        } finally {
+            connection.close();
         }
         return rowInserted;
     }
 
     @Override
     public  boolean updateTable (User user) throws SQLException{
+        connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getUpdateTableName());
         boolean rowUpdated = false;
         try {
@@ -100,6 +114,8 @@ public class UserDAOImpl implements UserDAO<User> {
         } catch (SQLException e) {
             System.out.println("updateTable failed");
             System.out.println(e.getMessage());
+        } finally {
+            connection.close();
         }
         return rowUpdated;
     }
@@ -108,6 +124,7 @@ public class UserDAOImpl implements UserDAO<User> {
     public List<User> selectTable() throws SQLException {
 
         List<User> users = new ArrayList<>();
+        connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getSelectFromTable());
         ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -115,13 +132,12 @@ public class UserDAOImpl implements UserDAO<User> {
             while (resultSet.next()) {
                 users.add(new User(resultSet.getInt("id"), resultSet.getString("name"),
                         resultSet.getString("email")));
-                //System.out.print(resultSet.getInt(1) + "|");
-                //System.out.print(resultSet.getString(2) + "|");
-                //System.out.println(resultSet.getString(3) + "|");
             }
         } catch (SQLException e) {
             System.out.println("selectTable failed");
             System.out.println(e.getMessage());
+        } finally {
+            connection.close();
         }
         //users.get(1);
         return users;
@@ -129,6 +145,7 @@ public class UserDAOImpl implements UserDAO<User> {
 
     @Override
     public boolean deleteTable( int id) throws  SQLException {
+        connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getDeleteFromTable());
         boolean rowDeleted = false;
         try {
@@ -138,6 +155,8 @@ public class UserDAOImpl implements UserDAO<User> {
         } catch(SQLException e) {
             System.out.println("deleteTable was failed");
             System.out.println(e.getMessage());
+        } finally {
+            connection.close();
         }
         return rowDeleted;
     }
