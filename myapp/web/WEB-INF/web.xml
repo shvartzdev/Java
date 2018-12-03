@@ -14,6 +14,9 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <!--<servlet>-->
+        <!--<servlet-name/>-->
+    <!--</servlet>-->
 
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
