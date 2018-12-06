@@ -46,7 +46,7 @@ public class UserListController {
     @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable int id) throws SQLException {
         User user = userDAO.getUserById(id);
-        return new ModelAndView("update","update",user);
+        return new ModelAndView("update","user",user);
     }
 
     @RequestMapping(value="/update",method = RequestMethod.POST)
