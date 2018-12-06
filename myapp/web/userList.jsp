@@ -33,20 +33,33 @@
         </tr>
 
 
-        <sql:query var="users" dataSource="jdbc/lab2">
-            select id, name, email from users
-        </sql:query>
+        <%--<sql:query var="users" dataSource="jdbc/lab2">--%>
+            <%--select id, name, email from users--%>
+        <%--</sql:query>--%>
 
-        <c:forEach  items="${users.rows}" var="row">
+        <%--<c:forEach  items="${users.rows}" var="row">--%>
 
+            <%--<tr>--%>
+                <%--<td><c:out value="${row.id}"></c:out></td>--%>
+                <%--<td><c:out value="${row.name}"></c:out></td>--%>
+                <%--<td><c:out value="${row.email}"></c:out></td>--%>
+                <%--<td>--%>
+                    <%--<a href="update/${row.id}">Edit</a>--%>
+                    <%--&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                    <%--<a href="delete/${row.id}">Delete</a>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
+        <%--</c:forEach>--%>
+
+        <c:forEach items="${users}" var="user">
             <tr>
-                <td><c:out value="${row.id}"></c:out></td>
-                <td><c:out value="${row.name}"></c:out></td>
-                <td><c:out value="${row.email}"></c:out></td>
+                <td><c:out value="${user.id}"></c:out></td>
+                <td><c:out value="${user.name}"></c:out></td>
+                <td><c:out value="${user.email}"></c:out></td>
                 <td>
-                    <a href="update/${row.id}">Edit</a>
+                    <a href="update/${user.id}">Edit</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="delete/${row.id}">Delete</a>
+                    <a href="delete/${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

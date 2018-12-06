@@ -30,9 +30,9 @@
                 <td>Email</td>
             </tr>
             <tr>
-                <td><input type="text" name="id" value="${user.getId()}"/></td>
-                <td><input type="text" name="name" value="${user.getName()}"/></td>
-                <td><input type="text" name="email" value="${user.getEmail()}"/></td>
+                <td><input type="text" name="id" value="${user.id}"/></td>
+                <td><input type="text" name="name" value="${user.name}"/></td>
+                <td><input type="text" name="email" value="${user.email}"/></td>
             </tr>
             <br><input type="submit" value="UPDATE"></br>
         </table>
