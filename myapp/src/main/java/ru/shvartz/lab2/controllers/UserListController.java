@@ -12,14 +12,20 @@ import ru.shvartz.lab2.models.implementations.UserDAOImpl;
 
 import java.sql.SQLException;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.model.DataModel;
 
-@Controller
+@ManagedBean
+@SessionScoped
 public class UserListController {
 
     @Autowired
     UserDAOImpl userDAO;
 
+    private DataModel model;
 
+    //TODO
     @RequestMapping(value="/list", method= RequestMethod.GET)
     public ModelAndView selectAllUsers() throws SQLException {
         List<User> users = userDAO.selectTable();
