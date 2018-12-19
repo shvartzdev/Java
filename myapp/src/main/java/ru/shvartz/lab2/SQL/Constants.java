@@ -6,7 +6,7 @@ import lombok.Value;
 @Value
 public class Constants {
 
-    private static final String insertIntoTable = "INSERT INTO users (id, name, email) VALUES(?,?,?)";
+    private static final String insertIntoTable = "INSERT INTO users (name, email) VALUES(?,?)";
     private static final String selectFromTable = "SELECT * FROM users  LIMIT 10";
     private static final String deleteFromTable = "DELETE FROM users where id = ?";
     private static final String updateTableName = "UPDATE users SET name = ?, email = ? where id = ?";
