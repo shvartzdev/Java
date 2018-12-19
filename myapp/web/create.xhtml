@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>JSF</title>
+</h:head>
+
+<h:body bgcolor="blue">
+
+
+
+<h1>Create</h1>
+
+    <h:form id="form" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div  class="col-sm-4">
+                <h2 style="text-align: center">Create new user</h2>
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            <h:outputLabel class="control-label col-sm-4"> Name</h:outputLabel>
+            <div class="col-sm-4">
+                <h:inputText  value="#{user.name}" class="form-control"
+                             validatorMessage="User name is required">
+                    <f:validateRequired />
+                </h:inputText>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel  class="control-label col-sm-4">Your Email</h:outputLabel>
+            <div class="col-sm-4">
+                <h:inputText  value="#{user.email}" class="form-control"
+                             validatorMessage="Email Id is required">
+                    <f:validateRequired/>
+                </h:inputText>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="col-sm-2">
+                    <h:commandButton value="Save" action="#{userDAOImpl.save(user.name, user.email)}" class="btn btn-success"
+                                     style="width: 80px;"></h:commandButton>
+                </div>
+                <div class="col-sm-1">
+                </div>
+                <div class="col-sm-2">
+                    <h:link outcome="index" value="View Users Record List" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </h:form>
+
+</h:body>
+</html>

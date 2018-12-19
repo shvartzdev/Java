@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>JSF</title>
+</h:head>
+
+<h:body bgcolor="blue">
+
+    <h:form id="form" class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <h2 style="text-align: center" class="col-sm-4">Edit Your Record</h2>
+        </div>
+        <hr/>
+        <div class="form-group">
+            <h:outputLabel  class="control-label col-sm-2">User ID</h:outputLabel>
+            <div class="col-sm-4">
+                <h:inputText id="id-id" value="#{user.id}" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel  class="control-label col-sm-2">User Name</h:outputLabel>
+            <div class="col-sm-4">
+                <h:inputText id="name-id" value="#{user.name}" class="form-control"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <h:outputLabel  class="control-label col-sm-2">Your Email</h:outputLabel>
+            <div class="col-sm-4">
+                <h:inputText id="email-id" value="#{user.email}" class="form-control"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <h:commandButton value="Update" action="#{userDAOImpl.updateTable(user.id, user.name, user.email)}"
+                                         class="btn btn-primary" style="width: 80px;"></h:commandButton>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>
