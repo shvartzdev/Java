@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.shvartz.lab2.SQL.ConnectionModel;
 
+import javax.faces.bean.ManagedBean;
 import java.sql.Connection;
 
 @Getter
 @Setter
+@ManagedBean
 public class User {
 
     public int id;
