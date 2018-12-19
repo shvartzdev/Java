@@ -5,17 +5,24 @@ import ru.shvartz.lab2.SQL.Constants;
 import ru.shvartz.lab2.interfaces.UserDAO;
 import ru.shvartz.lab2.models.User;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class UserDAOImpl implements UserDAO<User> {
+@ManagedBean(name = "userDAOImpl")
+@SessionScoped
+public class UserDAOImpl implements UserDAO<User>, Serializable {
 
     InitialContext initialContext = new InitialContext();
     DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/lab2");
@@ -24,6 +31,30 @@ public class UserDAOImpl implements UserDAO<User> {
     JdbcTemplate template;
 
     public UserDAOImpl() throws SQLException, NamingException {
+    }
+
+    public String method() {
+        return "method";
+    }
+
+    public String save(String name, String email) throws SQLException{
+        System.out.println("DBG" + name +  email);
+        int result = 0;
+        PreparedStatement preparedStatement;
+        try{
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement(Constants.getInsertIntoTable());
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, email);
+
+            result = preparedStatement.executeUpdate();
+            connection.close();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        if(result !=0)
+            return "index.xhtml?faces-redirect=true";
+        else return "create.xhtml?faces-redirect=true";
     }
 
     public void setTemplate(JdbcTemplate template) {
@@ -118,6 +149,25 @@ public class UserDAOImpl implements UserDAO<User> {
         }
         return rowUpdated;
     }
+    public String updateTable(int id, String name, String email) throws  SQLException {
+        connection = dataSource.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(Constants.getUpdateTableName());
+        try {
+            preparedStatement.setInt(3, id);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, email);
+            preparedStatement.executeUpdate();
+            System.out.println(id + name + email);
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println("updateTable failed");
+            System.out.println(e.getMessage());
+        } finally {
+            connection.close();
+        }
+
+        return "/index.xhtml?faces-redirect=true";
+    }
 
     @Override
     public List<User> selectTable() throws SQLException {
@@ -132,10 +182,12 @@ public class UserDAOImpl implements UserDAO<User> {
                 users.add(new User(resultSet.getInt("id"), resultSet.getString("name"),
                         resultSet.getString("email")));
             }
+
         } catch (SQLException e) {
             System.out.println("selectTable failed");
             System.out.println(e.getMessage());
         } finally {
+            preparedStatement.close();
             connection.close();
         }
         //users.get(1);
@@ -143,21 +195,24 @@ public class UserDAOImpl implements UserDAO<User> {
     }
 
     @Override
-    public boolean deleteTable( int id) throws  SQLException {
+    public String deleteTable(int id) throws  SQLException {
+
         connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(Constants.getDeleteFromTable());
-        boolean rowDeleted = false;
         try {
             preparedStatement.setInt(1, id);
-            rowDeleted = preparedStatement.executeUpdate() > 0;
-            preparedStatement.close();
+            preparedStatement.executeUpdate();
+
         } catch(SQLException e) {
             System.out.println("deleteTable was failed");
             System.out.println(e.getMessage());
         } finally {
+            preparedStatement.close();
             connection.close();
         }
-        return rowDeleted;
+        return "refresh";
     }
+
+
 
 }
