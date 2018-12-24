@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
@@ -18,6 +19,9 @@
 
 
     <welcome-file>faces/index.xhtml</welcome-file>
+
+
+
 
 </welcome-file-list>
     <servlet>
@@ -47,5 +51,51 @@
         <param-value>Development</param-value>
     </context-param>
 
+    <context-param>
 
+        <param-name>org.apache.myfaces.trinidad.USE_APPLICATION_VIEW_CACHE</param-name>
+
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+
+        <param-name>org.apache.myfaces.trinidad.CHECK_FILE_MODIFICATION</param-name>
+
+        <param-value>true</param-value>
+    </context-param>
+
+
+    <!--<filter>-->
+        <!--<filter-name>trinidad</filter-name>-->
+
+        <!--<filter-class>org.apache.myfaces.trinidad.webapp.TrinidadFilter</filter-class>-->
+
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>trinidad</filter-name>-->
+        <!--<servlet-name>Faces Servlet</servlet-name>-->
+    <!--</filter-mapping>-->
+
+    <!--<filter>-->
+        <!--<filter-name>trinidad</filter-name>-->
+        <!--<filter-class>org.apache.myfaces.trinidad.webapp.TrinidadFilter</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>trinidad</filter-name>-->
+        <!--&lt;!&ndash; This assumes that the FacesServlet has been registered &ndash;&gt;-->
+        <!--&lt;!&ndash; under the name "faces" &ndash;&gt;-->
+        <!--<servlet-name>faces</servlet-name>-->
+    <!--</filter-mapping>-->
+
+    <servlet>
+        <servlet-name>resources</servlet-name>
+
+        <servlet-class>org.apache.myfaces.trinidad.webapp.ResourceServlet</servlet-class>
+
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>resources</servlet-name>
+        <url-pattern>/adf/*</url-pattern>
+    </servlet-mapping>
 </web-app>
