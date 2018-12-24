@@ -1,50 +1,46 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>JSF</title>
 </h:head>
 
+
 <h:body bgcolor="blue">
 
 
-    <h:dataTable binding="${table}" value="${userDAOImpl.selectTable()}" var="u">
-        <h:column>
-            <f:facet name="header">Id</f:facet>
-            <!--<h:outputText value="#{table.rowIndex + 1}"/>-->
-            <h:outputText value="${u.id}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Name</f:facet>
-            <h:outputText value="#{u.name}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Email</f:facet>
-            <h:outputText value="#{u.email}"/>
-        </h:column>
+    <p:dataTable var="user" value="#{userDAOImpl.selectTable()}" rowKey="#{user.id}">
+        <p:column headerText="Name" >
+            <f:facet name="header">
+                <h:outputText value="Name" />
+            </f:facet>
+            <h:outputText id="name" value="#{user.name}" />
+        </p:column>
 
-        <h:column>
-            <f:facet name="header">Update</f:facet>
+        <p:column headerText="Email" >
+            <f:facet name="header">
+                <h:outputText value="Email" />
+            </f:facet>
+            <h:outputText id="email" value="#{user.email}" />
+        </p:column>
+        <p:column >
             <h:form>
-                <h:button value="Update" outcome="updation"></h:button>
-
+                <h:button value="Edit" outcome="updation"></h:button>
+                <h:commandButton value="Delete" action="${userDAOImpl.deleteTable(user.id)}"></h:commandButton>
             </h:form>
-        </h:column>
-
-        <h:column>
-            <f:facet name="header">Delete</f:facet>
-            <h:form>
-            <h:commandButton value="Delete" action="${userDAOImpl.deleteTable(u.id)}"></h:commandButton>
-            </h:form>
-        </h:column>
-    </h:dataTable>
+        </p:column>
+    </p:dataTable>
 
 
-<h:form>
-    <h:button value="Add new user" outcome="creation" />
-</h:form>
+    <h:form>
+        <h:button value="Add new user" outcome="creation" />
+    </h:form>
+
 </h:body>
 </html>
