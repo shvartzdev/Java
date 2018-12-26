@@ -15,7 +15,9 @@
 <h:body bgcolor="blue">
 
 
-    <p:dataTable var="user" value="#{userDAOImpl.selectTable()}" rowKey="#{user.id}">
+    <p:dataTable binding="#{userDAOImpl.table}" var="user" value="#{userDAOImpl.selectTable()}" rowKey="#{user.id}">
+
+
         <p:column headerText="Name" >
             <f:facet name="header">
                 <h:outputText value="Name" />

@@ -7,7 +7,6 @@ import ru.shvartz.lab2.models.User;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -18,7 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @ManagedBean(name = "userDAOImpl")
 @SessionScoped
@@ -27,18 +25,33 @@ public class UserDAOImpl implements UserDAO<User>, Serializable {
     InitialContext initialContext = new InitialContext();
     DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/lab2");
     Connection connection = null;
-
     JdbcTemplate template;
 
     public UserDAOImpl() throws SQLException, NamingException {
+
     }
 
-    public String method() {
-        return "method";
+    public void deleteTable(List<Integer> list) throws SQLException{
+        PreparedStatement preparedStatement;
+
+        try {
+            connection = dataSource.getConnection();
+            for (Integer id:list
+                 ) {
+                preparedStatement = connection.prepareStatement(Constants.getDeleteFromTable());
+                preparedStatement.setInt(1,id);
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            connection.close();
+        }
     }
 
     public String save(String name, String email) throws SQLException{
-        System.out.println("DBG" + name +  email);
+        //System.out.println("DBG" + name +  email);
         int result = 0;
         PreparedStatement preparedStatement;
         try{

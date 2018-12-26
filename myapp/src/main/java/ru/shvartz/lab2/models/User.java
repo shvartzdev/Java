@@ -13,6 +13,8 @@ import java.sql.Connection;
 @ManagedBean
 public class User {
 
+
+
     public int id;
     private String name;
     private String email;
