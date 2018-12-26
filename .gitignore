@@ -16,7 +16,7 @@
 
 # Generated files
 .idea/**/contentModel.xml
-
+/myapp.imi
 
 #generated classes for deployement
 classes/
